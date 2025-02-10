@@ -1,4 +1,15 @@
+let noClickCount = 0; // Counter for tracking "No" button clicks
+
 function showMessage(response) {
+  // Text lines to show when "No" is clicked
+  const noResponseMessages = [
+    "AYOS!",
+    "Ay Wag Naman TT",
+    "Bruh kinausap ko na kabit mo",
+    "Why are you literally avoiding me???!!?!?!?",
+    "Di mo na ba ako love? TT"
+  ];
+
   if (response === "No") {
     const noButton = document.getElementById("no-button");
     const container = document.querySelector(".container");
@@ -19,12 +30,17 @@ function showMessage(response) {
     noButton.style.left = randomX + "px";
     noButton.style.top = randomY + "px";
 
-    // Update text content and hide name message
-    document.getElementById("question").textContent =
-      "Bat mo ba kasi pinipindot?";
+    // Change question text to the current message based on noClickCount
+    document.getElementById("question").textContent = noResponseMessages[noClickCount];
+
+    // Optionally hide name message
     document.getElementById("name").style.display = "none";
 
-    // Optional: You can also add a timeout to reset the position after a few seconds
+    // Increment click count, and reset if it exceeds the number of messages
+    noClickCount++;
+    if (noClickCount >= noResponseMessages.length) {
+      noClickCount = 0;  // Reset to loop back through the messages
+    }
   }
 
   if (response === "Yes") {
